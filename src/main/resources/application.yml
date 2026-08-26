@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: jobify
+server:
+  port: 8099
