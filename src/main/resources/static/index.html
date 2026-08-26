@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jobify — Send HR mail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="page">
+        <aside class="rail">
+            <p class="mark">Jobify</p>
+            <h1>Send your application in one shot.</h1>
+            <p class="lede">Fill the HR details. We attach your CV and send the HTML template you already tuned.</p>
+            <ul class="notes">
+                <li>To, greeting name, role, and optional CC</li>
+                <li>Resume PDF goes out automatically</li>
+                <li>Same API you used from Postman</li>
+            </ul>
+        </aside>
+
+        <main class="sheet">
+            <form id="mail-form" novalidate>
+                <header class="sheet-head">
+                    <h2>Compose</h2>
+                    <p id="subject-preview" class="subject">Application for <em>your role</em> — Java &amp; Spring Boot | FinTech &amp; Payments | Immediate Joiner</p>
+                </header>
+
+                <label>
+                    HR name
+                    <input id="hrName" name="hrName" type="text" autocomplete="name" required placeholder="Priya Sharma">
+                </label>
+
+                <label>
+                    HR email
+                    <input id="email" name="email" type="email" autocomplete="email" required placeholder="hr@company.com">
+                </label>
+
+                <label>
+                    Role
+                    <input id="role" name="role" type="text" required placeholder="Java Backend Developer">
+                </label>
+
+                <fieldset class="cc-block">
+                    <legend>CC (optional)</legend>
+                    <div class="cc-row">
+                        <input id="cc-input" type="email" placeholder="recruiter@company.com" aria-label="Add CC email">
+                        <button type="button" id="cc-add" class="ghost">Add</button>
+                    </div>
+                    <ul id="cc-list" class="chips" hidden></ul>
+                </fieldset>
+
+                <p id="form-status" class="status" role="status" hidden></p>
+
+                <button type="submit" id="send-btn" class="send">Send mail with CV</button>
+            </form>
+        </main>
+    </div>
+    <script src="/js/app.js"></script>
+</body>
+</html>
