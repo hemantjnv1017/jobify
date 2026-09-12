@@ -214,6 +214,121 @@ input:focus {
     color: var(--danger);
 }
 
+.nav {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+.nav a {
+    color: #c9d6cc;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 600;
+    padding: 8px 14px;
+    border: 1px solid rgba(201, 214, 204, 0.35);
+    border-radius: 999px;
+}
+
+.nav a:hover {
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.45);
+}
+
+.nav a.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-color: transparent;
+}
+
+.page-wide {
+    max-width: 1200px;
+}
+
+.sheet-head-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    margin-top: 8px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.history-table th,
+.history-table td {
+    text-align: left;
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+}
+
+.history-table th {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.history-table tbody tr:hover {
+    background: #f7f1e6;
+}
+
+.placeholder-row td {
+    color: var(--muted);
+    text-align: center;
+    padding: 28px 10px;
+}
+
+.placeholder-row a {
+    color: var(--accent-dark);
+}
+
+.sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
+.badge.ok {
+    background: #e7f4ea;
+    color: var(--ok);
+}
+
+.badge.err {
+    background: #fdeaea;
+    color: var(--danger);
+}
+
+.error-note {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--danger);
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media (min-width: 860px) {
     .page {
         grid-template-columns: 0.9fr 1.1fr;

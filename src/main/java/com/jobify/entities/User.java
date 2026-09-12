@@ -1,4 +1,4 @@
-package com.jobify.user;
+package com.jobify.entities;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

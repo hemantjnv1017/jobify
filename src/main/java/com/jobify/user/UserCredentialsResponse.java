@@ -1,5 +1,7 @@
 package com.jobify.user;
 
+import com.jobify.entities.UserCredentials;
+
 public record UserCredentialsResponse(
         Long id,
         Long userId,

@@ -1,4 +1,4 @@
-package com.jobify.user;
+package com.jobify.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

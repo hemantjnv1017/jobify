@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jobify — Mail history</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <div class="page page-wide">
+        <aside class="rail">
+            <p class="mark">Jobify</p>
+            <h1>Every application you sent.</h1>
+            <p class="lede">Newest first — HR contact, role, status, and when it went out.</p>
+            <nav class="nav">
+                <a href="/">Compose</a>
+                <a href="/history.html" class="active" aria-current="page">History</a>
+            </nav>
+        </aside>
+
+        <main class="sheet">
+            <header class="sheet-head sheet-head-row">
+                <div>
+                    <h2>Mail history</h2>
+                    <p class="subject">Sorted by created time, newest on top.</p>
+                </div>
+                <button type="button" id="refresh-btn" class="ghost">Refresh</button>
+            </header>
+
+            <p id="history-status" class="status" role="status" hidden></p>
+
+            <div class="table-wrap">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>When</th>
+                            <th>HR</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>CC</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-body">
+                        <tr class="placeholder-row">
+                            <td colspan="5">Loading history…</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="/js/history.js"></script>
+</body>
+</html>

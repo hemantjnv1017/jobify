@@ -1,6 +1,7 @@
 package com.jobify.user;
 
-import java.time.Instant;
+import com.jobify.entities.User;
+
 import java.time.LocalDateTime;
 
 public record UserResponse(
