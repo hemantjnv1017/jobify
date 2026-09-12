@@ -27,7 +27,15 @@ public class HrMailController {
     public ResponseEntity<Map<String, Object>> sendMail(@Valid @RequestBody SendHrMailRequest request) {
         log.info("Received HR mail request for {} ({}) role={} cc={}",
                 request.email(), request.hrName(), request.role(), request.cc());
-        hrMailService.sendToHr(request.email(), request.hrName(), request.role(), request.cc());
+
+        hrMailService.sendToHr(
+//                request.fromEmail(),
+                "hemantjnv1017@gmail.com",
+                request.email(),
+                request.hrName(),
+                request.role(),
+                request.cc()
+        );
         return ResponseEntity.ok(Map.of(
                 "status", "sent",
                 "to", request.email(),

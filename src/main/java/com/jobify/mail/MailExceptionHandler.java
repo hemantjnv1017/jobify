@@ -1,5 +1,7 @@
 package com.jobify.mail;
 
+import com.jobify.user.UserCredentialsNotFoundException;
+import com.jobify.user.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,18 @@ public class MailExceptionHandler {
                 .orElse("Invalid request");
         log.warn("HR mail request validation failed: {}", message);
         return ResponseEntity.badRequest().body(Map.of("error", message));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleUserNotFound(UserNotFoundException ex) {
+        log.warn(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(UserCredentialsNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleCredentialsNotFound(UserCredentialsNotFoundException ex) {
+        log.warn(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));
     }
 
     @ExceptionHandler(IllegalStateException.class)

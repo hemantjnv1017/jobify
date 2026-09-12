@@ -1,10 +1,11 @@
 package com.jobify.mail;
 
+import com.jobify.user.UserCredentials;
+import com.jobify.user.UserMailCredentialsService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailPreparationException;
@@ -99,15 +100,15 @@ public class HrMailService {
             </html>
             """;
 
-    private final JavaMailSender mailSender;
-    private final String fromAddress;
+    private final UserMailCredentialsService userMailCredentialsService;
+    private final SmtpMailSenderFactory smtpMailSenderFactory;
 
     public HrMailService(
-            JavaMailSender mailSender,
-            @Value("${spring.mail.username}") String fromAddress
+            UserMailCredentialsService userMailCredentialsService,
+            SmtpMailSenderFactory smtpMailSenderFactory
     ) {
-        this.mailSender = mailSender;
-        this.fromAddress = fromAddress;
+        this.userMailCredentialsService = userMailCredentialsService;
+        this.smtpMailSenderFactory = smtpMailSenderFactory;
     }
 
     static String subjectFor(String role) {
@@ -118,8 +119,22 @@ public class HrMailService {
         return BODY_TEMPLATE.formatted(hrName, role);
     }
 
-    public void sendToHr(String hrEmail, String hrName, String role, ArrayList<String> cc) {
-        log.info("Sending HR mail with CV attachment to {} ({}) role={} cc={}", hrEmail, hrName, role, cc);
+    public void sendToHr(
+            String fromEmail,
+            String hrEmail,
+            String hrName,
+            String role,
+            ArrayList<String> cc
+    ) {
+        UserCredentials credentials = userMailCredentialsService.getCredentialsByUserEmail(fromEmail);
+        JavaMailSender mailSender = smtpMailSenderFactory.create(
+                credentials.getSmtpUsername(),
+                credentials.getSmtpPassword()
+        );
+        String fromAddress = credentials.getSmtpUsername();
+
+        log.info("Sending HR mail from {} to {} ({}) role={} cc={}",
+                fromAddress, hrEmail, hrName, role, cc);
         ClassPathResource cv = new ClassPathResource(CV_RESOURCE);
         if (!cv.exists()) {
             log.error("CV PDF missing on classpath: {}", CV_RESOURCE);
@@ -137,7 +152,7 @@ public class HrMailService {
             helper.setText(bodyFor(hrName, role), true);
             helper.addAttachment(CV_FILENAME, cv);
             mailSender.send(message);
-            log.info("HR mail with CV sent to {}", hrEmail);
+            log.info("HR mail with CV sent from {} to {}", fromAddress, hrEmail);
         } catch (MessagingException ex) {
             log.error("Failed to prepare HR mail to {}", hrEmail, ex);
             throw new MailPreparationException("Failed to prepare HR mail with CV attachment", ex);
